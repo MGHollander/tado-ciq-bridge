@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class LoginController
 {
@@ -31,7 +30,7 @@ class LoginController
         ]);
 
         $user = new User;
-        $response = $user->newAccessToken($request->input('email'), $request->input('password'));
+        $response = $user->newAccessToken($request->email, $request->password);
 
         if (isset($response['error'])) {
             return back()
