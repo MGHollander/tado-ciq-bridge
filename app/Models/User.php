@@ -14,7 +14,17 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    /**
+     * @var string
+     */
     public $tadoAuthUrl = 'https://auth.tado.com/oauth';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['email'];
 
     /**
      * Login in tado° and create a new session with the response.
@@ -22,14 +32,16 @@ class User extends Authenticatable
      * @param $email
      * @param $password
      */
-    public function newAccessToken($email, $password)
+    public static function getAccessToken($email, $password)
     {
         $client_id = config('tado.client_id');
         $client_secret = config('tado.client_secret');
         $scope = config('tado.scope');
         $expires_at = Carbon::now();
 
-        $url = $this->tadoAuthUrl ."/token?client_id=$client_id&client_secret=$client_secret&scope=$scope&grant_type=password&username=$email&password=$password";
+        $user = User::firstOrNew(['email' => $email]);
+
+        $url = $user->tadoAuthUrl ."/token?client_id=$client_id&client_secret=$client_secret&scope=$scope&grant_type=password&username=$email&password=$password";
         $response = Http::post($url)->json();
 
         Log::debug("Create an access token for $email.", ['response' => $response]);
@@ -38,20 +50,20 @@ class User extends Authenticatable
             return $response;
         }
 
-        $token = Str::random(64);
+        if (!$user->exists()) {
+            $user->api_token = Str::random(64);
+        }
 
-        $user = User::firstOrNew(['email' => $email]);
-        $user->api_token = hash('sha256', $token);
         $user->access_token = $response['access_token'];
         $user->token_type = $response['token_type'];
         $user->refresh_token = $response['refresh_token'];
         $user->expires_at = $expires_at->addSeconds($response['expires_in']);
         $user->save();
 
-        Log::debug("Session created for $email with token $token");
+        Log::debug("Session created for $email with token $user->api_token");
 
         return [
-            'token' => $token,
+            'api_token' => $user->api_token,
         ];
     }
 

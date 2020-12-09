@@ -20,7 +20,7 @@ class LoginController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -29,8 +29,7 @@ class LoginController
             'password' => ['required', 'min:6'],
         ]);
 
-        $user = new User;
-        $response = $user->newAccessToken($request->email, $request->password);
+        $response = User::getAccessToken($request->email, $request->password);
 
         if (isset($response['error'])) {
             return back()
@@ -39,9 +38,7 @@ class LoginController
         }
 
         return redirect(
-            route('login.callback', [
-                'api_token' => $response['token'],
-            ])
+            route('login.callback', $response)
         );
     }
 
@@ -52,10 +49,10 @@ class LoginController
      * makeOAuthRequest method.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return array
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function callback(Request $request): array
+    public function callback(Request $request)
     {
-        return [];
+        return redirect(route('home'));
     }
 }
