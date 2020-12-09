@@ -37,13 +37,19 @@ class TadoController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function me()
     {
-        $response = $this->tado('/me');
+        $me = $this->tado('/me');
 
-        return $response->json();
+        return [
+            'id' => $me['id'],
+            'username' => $me['username'],
+            'name' => $me['name'],
+            'email' => $me['email'],
+            'homes' => $me['homes'],
+        ];
     }
 
     /**
