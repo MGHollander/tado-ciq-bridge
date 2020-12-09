@@ -27,11 +27,11 @@ class TadoController extends Controller
 
         $response = Http::withHeaders(['authorization' => $token_type .' '. $access_token])->$method($url);
 
-        // TODO add extra check if error is returned for expired token and then try to refresh if.
+        // TODO add extra check if error is returned for expired token and then try to refresh it.
 
         Log::debug("Request ($method) to $url", ['response' => $response]);
 
-        return $response;
+        return $response->json();
     }
 
     /**
