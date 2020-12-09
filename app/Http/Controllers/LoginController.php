@@ -25,7 +25,6 @@ class LoginController
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'email' => ['required', 'email:rfc'],
             'password' => ['required', 'min:6'],
@@ -40,6 +39,24 @@ class LoginController
                 ->withErrors(['email' => $response['error_description']]);
         }
 
-        return response($response, Response::HTTP_CREATED);
+        return redirect(
+            route('login.callback', [
+                'api_token' => $response['token'],
+            ])
+        );
+    }
+
+    /**
+     * Callback for a successful login.
+     *
+     * This is just a placeholder to serve a valid response for the Garmin IQ
+     * makeOAuthRequest method.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function callback(Request $request): array
+    {
+        return [];
     }
 }
