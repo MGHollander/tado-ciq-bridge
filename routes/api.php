@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\TadoController;
-use App\Http\Controllers\Api\TadoDevicesController;
 use App\Http\Controllers\Api\TadoZonesController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/me', [TadoController::class, 'me']);
+
+    Route::get('/zones/{homeId}', [TadoZonesController::class, 'zones']);
 });
