@@ -17,7 +17,7 @@ class TadoController extends Controller
             $user = $user->refreshAccessToken();
 
             if (isset($response['error'])) {
-                return route('login');
+                return $response;
             }
         }
 
