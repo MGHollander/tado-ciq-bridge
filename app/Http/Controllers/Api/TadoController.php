@@ -39,7 +39,7 @@ class TadoController extends Controller
      *
      * @return array
      */
-    public function me()
+    public function me(): array
     {
         $me = $this->tado('/me');
 
