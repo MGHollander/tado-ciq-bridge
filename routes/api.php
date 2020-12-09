@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\Api\TadoController;
 use App\Http\Controllers\Api\TadoDevicesController;
-use App\Http\Controllers\Api\TadoHomesController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\TadoZonesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/me', [TadoController::class, 'me']);
-    Route::get('/homes/{homeId}/devices', [TadoHomesController::class, 'devices']);
-    Route::get('/devices/{deviceId}/hi', [TadoDevicesController::class, 'hi']);
 });

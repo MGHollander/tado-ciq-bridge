@@ -51,16 +51,4 @@ class TadoController extends Controller
             'homes' => $me['homes'],
         ];
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function devices($homeId)
-    {
-        $response = $this->tado("/homes/$homeId/devices");
-
-        return $response->json();
-    }
 }
