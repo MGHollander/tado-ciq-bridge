@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Log;
 
 class TadoController extends Controller
 {
+
+    /**
+     * Make a call to the tado° API.
+     *
+     * Before we make the call we check the expiration date of the access token
+     * and we refresh it if is is expired.
+     *
+     * @param  string  $endpoint
+     * @param  string  $method
+     *
+     * @return mixed
+     */
     public function tado($endpoint, $method = 'get')
     {
         $user = auth('api')->user();
@@ -35,7 +47,7 @@ class TadoController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Get user information.
      *
      * @return array
      */
