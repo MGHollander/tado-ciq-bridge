@@ -18,6 +18,10 @@ class TadoZonesController extends TadoController
 
         $response = [];
         foreach ($zones as $zone) {
+            if ($zone['type'] !== "HEATING") {
+                continue;
+            }
+
             $zoneState = $this->tado("/homes/$homeId/zones/{$zone['id']}/state");
 
             $response[] = [
@@ -25,6 +29,10 @@ class TadoZonesController extends TadoController
                 'temperature' => [
                     'celsius' => $zoneState['sensorDataPoints']['insideTemperature']['celsius'],
                     'fahrenheit' => $zoneState['sensorDataPoints']['insideTemperature']['fahrenheit'],
+                    'setting' => [
+                        'celsius' => $zoneState['setting']['temperature']['celsius'],
+                        'fahrenheit' => $zoneState['setting']['temperature']['fahrenheit'],
+                    ],
                 ],
                 'humidity' => $zoneState['sensorDataPoints']['humidity']['percentage'],
             ];
