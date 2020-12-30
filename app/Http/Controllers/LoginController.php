@@ -12,7 +12,8 @@ class LoginController
      *
      * @return \Illuminate\Http\Response
      */
-    function index() {
+    function index()
+    {
         return view('login');
     }
 
