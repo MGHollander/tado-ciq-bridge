@@ -1,9 +1,9 @@
-name: Laravel
+name: Deploy
 
 on: workflow_dispatch
 
 jobs:
-  laravel-tests:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -15,7 +15,7 @@ jobs:
     - name: Install Dependencies
       run: |
         composer install --optimize-autoloader --no-dev
-        composer require laravel/envoy --dev
+        composer global require "laravel/envoy"
     - name: Setup Node.js
       uses: actions/setup-node@v2-beta
       with:
@@ -26,4 +26,4 @@ jobs:
     - name: Compile assets for production
       run: npm run production
     - name: Run Envoy deploy
-      run: php vendor/bin/envoy run deploy
+      run: envoy run deploy
