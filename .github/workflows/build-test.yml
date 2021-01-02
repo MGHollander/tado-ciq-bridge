@@ -1,4 +1,4 @@
-name: Laravel
+name: Build & test
 
 on:
   push:
@@ -7,19 +7,34 @@ on:
     branches: [ develop ]
 
 jobs:
-  laravel-tests:
-
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: shivammathur/setup-php@b7d1d9c9a92d8d8463ce36d7f60da34d461724f8
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v2-beta
       with:
-        php-version: '8.0'
-    - uses: actions/checkout@v2
+        node-version: '12'
+        check-latest: true
+    - name: Install NPM dependencies
+      run: npm install
+    - name: Compile assets for production
+      run: npm run production
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: composer install -q --no-ansi --no-interaction --no-scripts --prefer-dist
     - name: Generate key
       run: php artisan key:generate
     - name: Directory Permissions
