@@ -14,7 +14,7 @@ jobs:
         php-version: '7.4'
     - name: Install Dependencies
       run: |
-        composer install --optimize-autoloader --prefer-dist --no-dev --no-interaction -no-scripts
+        composer install --optimize-autoloader --prefer-dist --no-dev --no-interaction --no-scripts
         composer global require "laravel/envoy"
     - name: Setup Node.js
       uses: actions/setup-node@v2-beta
