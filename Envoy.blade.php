@@ -1,6 +1,6 @@
 @setup
     $productionPath = '/home/marucn1q/subdomains/tado-ciq-bridge';
-    $productionServer = 'mghollander.nl';
+    $productionServer = 'marucn1q@mghollander.nl:4000';
 @endsetup
 
 @servers(['local' => '127.0.0.1', 'production' => $productionServer])
