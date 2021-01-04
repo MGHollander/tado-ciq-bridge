@@ -64,9 +64,9 @@ fi
 
 log "Install composer packages"
 if [ "${ENV}" == "@prod" ]; then
-    composer install --optimize-autoloader --prefer-dist --no-dev --no-interaction --no-scripts --no-progress --no-suggest  || exit 1
+    composer install --optimize-autoloader --prefer-dist --no-dev --no-interaction --no-scripts --no-progress || exit 1
 else
-    composer install --no-interaction  --no-progress --no-suggest || exit 1
+    composer install --no-interaction  --no-progress || exit 1
 fi
 
 if ! hash npm; then
