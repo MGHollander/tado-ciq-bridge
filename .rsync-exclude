@@ -4,7 +4,6 @@
 .git*
 .rsync-exclude
 .styleci.yml
-Envoy.blade.php
 README.md
 TODO.md
 bootstrap/cache
