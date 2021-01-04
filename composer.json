@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "mghollander/tado-ciq-bridge",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "This Laravel based API makes it possible to control your tado° smart thermostat from your Garmin device.",
     "keywords": [
         "framework",
         "laravel"
