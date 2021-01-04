@@ -5,11 +5,19 @@ your tado° smart thermostat and your Garmin wearable.
 
 tado° has an API to control your smart thermostat, but their API is not publicly
 documented by tado°. There are several user initiatives to document the API,
-such as https://shkspr.mobi/blog/2019/02/tado-api-guide-updated-for-2019/ and
-https://documenter.getpostman.com/view/154267/S11Bz2gw.
+such as <https://shkspr.mobi/blog/2019/02/tado-api-guide-updated-for-2019/> and
+<https://documenter.getpostman.com/view/154267/S11Bz2gw>.
 
 This API uses the tado° API to get information from tado° and narrows it down to
 the bear minimum for the Garmin tado° widget. This helps the widget performance.
+
+## Table of content <!-- omit in toc -->
+
+- [Scheduler](#scheduler)
+- [API documentation](#api-documentation)
+  - [Get user information](#get-user-information)
+  - [Get data from all zones in a home](#get-data-from-all-zones-in-a-home)
+- [Contribution](#contribution)
 
 ## Scheduler
 
@@ -36,7 +44,7 @@ returns
 
 ```json
 {
-    "id": "auniquidbytado",
+    "id": "4un1qu31d6y74d0",
     "username": "email@example.com",
     "name": "Your Name",
     "email": "email@example.com",
@@ -61,7 +69,7 @@ for each zone to get the zone information.
 
 returns
 
-```
+```json
 [
     {
         "name": "Living room",
@@ -88,4 +96,26 @@ returns
         "humidity": 66.6
     }
 ]
+```
+
+## Contribution
+
+This project use Laravel Envoy for build and deployment tasks
+
+Run the following commands from the project root in the terminal to build and
+deploy for local used and development.
+
+```bash
+bash scripts/build.sh
+bash scripts/deploy.sh
+```
+
+Add `@prod` as the first argument for both scripts to prepare it for use on a
+production environment. Usage of both scripts is available via the `-h` option.
+
+Run the following command to watch for changes in front-end files and
+automatically build the compiled files when changes are made.
+
+```bash
+npm run watch
 ```
