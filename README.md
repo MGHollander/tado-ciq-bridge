@@ -1,4 +1,4 @@
-# tado° Garmin Connect IQ Bridge
+# tado° Garmin Connect IQ bridge
 
 This [Laravel](https://laravel.com/) based API functions as a bridge between
 your tado° smart thermostat and your Garmin wearable.
@@ -8,8 +8,9 @@ documented by tado°. There are several user initiatives to document the API,
 such as <https://shkspr.mobi/blog/2019/02/tado-api-guide-updated-for-2019/> and
 <https://documenter.getpostman.com/view/154267/S11Bz2gw>.
 
-This API uses the tado° API to get information from tado° and narrows it down to
-the bear minimum for the Garmin tado° widget. This helps the widget performance.
+This API uses the tado° API to get information from your tado° smart thermostat
+and narrows it down to the bear minimum for the
+[Garmin tado° widget](https://github.com/MGHollander/tado-ciq-widget).
 
 ## Table of content <!-- omit in toc -->
 
