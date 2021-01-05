@@ -18,6 +18,7 @@ the bear minimum for the Garmin tado° widget. This helps the widget performance
   - [Get user information](#get-user-information)
   - [Get data from all zones in a home](#get-data-from-all-zones-in-a-home)
 - [Contribution](#contribution)
+- [Deployment](#deployment)
 
 ## Scheduler
 
@@ -119,3 +120,38 @@ automatically build the compiled files when changes are made.
 ```bash
 npm run watch
 ```
+
+## Deployment
+
+Automated deployments are configure using [CodeShip](https://app.codeship.com/).
+The following steps need to be taken to trigger a deployment.
+
+1. Checkout the `develop` branch and make sure you have al the latest
+changes.
+
+    ```bash
+    git checkout develop
+    git pull origin develop
+    ```
+
+2. Create a release branch with the new version. Replace x.x.x with the new
+version. Run `git describe --tags $(git rev-list --tags --max-count=1)` to get
+the last release tag, if you don't know the last version and bump the version.
+
+    ```bash
+    git checkout -b release-x.x.x develop
+    ```
+
+3. Create a tag for the new release. Replace both instances of x.x.x with the
+new version.
+
+    ```bash
+    git tag x.x.x -am "Version x.x.x"
+    ```
+
+4. Push the branch and tag to GitHub. The deployment will be trigger
+automatically.
+
+    ```bash
+    git push origin release-x.x.x
+    ```
