@@ -3,9 +3,13 @@
     "type": "project",
     "description": "This Laravel based API makes it possible to control your tado° smart thermostat from your Garmin device.",
     "keywords": [
-        "framework",
-        "laravel"
+        "api",
+        "connectiq",
+        "garmin",
+        "laravel",
+        "tado"
     ],
+    "version": "0.0.1",
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
