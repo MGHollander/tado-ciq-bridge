@@ -107,7 +107,7 @@ if [ "${ENV}" == "@acc" ] || [ "${ENV}" == "@prod" ]; then
   fi
 
   log "Execute rsync"
-  rsync -e "ssh -p ${PORT}" . "${SERVER}:${DEPLOY_PATH}" -ahlvz --stats --delete-after --exclude-from='.rsync-exclude' --backup-dir="${BACKUP_PATH}" || exit 1
+  rsync -e "ssh -p ${PORT}" . "${SERVER}:${DEPLOY_PATH}" -hlrtuvz --stats --delete-after --exclude-from='.rsync-exclude' --backup-dir="${BACKUP_PATH}" || exit 1
 
   log_success "Successfully finished rsync"
 else
