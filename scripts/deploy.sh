@@ -4,8 +4,8 @@ source "$(dirname "$0")/common.sh"
 # Stop on any error.
 set -e
 
-BACKUP_PATH="/home/marucn1q/backups/tado-ciq-bridge/$(date +'%Y%m%d%H%M%S')"
-DEPLOY_PATH="/home/marucn1q/subdomains/tado-ciq-bridge"
+BACKUP_PATH="/home/tadocigbridge/backups/tado-ciq-bridge.mghollander.nl/$(date +'%Y%m%d%H%M%S')"
+DEPLOY_PATH="/home/tadocigbridge/laravel"
 
 function usage() {
     log_warning "Usage:"
@@ -17,6 +17,7 @@ function usage() {
     log_text ""
     log_warning "Options:"
     log_text "\033[32m  -h, --help       \033[0m  Display this help message"
+    log_text "\033[32m  -d, --dry-run    \033[0m  Dry-run the rsync (only work on non-local aliases)"
     log_text "\033[32m  -f, --force      \033[0m  Force the deployment no matter the environment"
     log_text "\033[32m  -p, --port       \033[0m  Port to use during deployment"
 }
@@ -28,6 +29,10 @@ while (( "$#" )); do
         -h|--help)
             usage
             exit 0
+            ;;
+        -d|--dry-run)
+            DRY_RUN=1
+            shift 1
             ;;
         -f|--force)
             FORCE_DEPLOY=1
@@ -83,6 +88,12 @@ log_text "The current environment is \033[1m${ENV}"
 
 # @TODO make a reuasable statement for this check
 if [ "${ENV}" == "@acc" ] || [ "${ENV}" == "@prod" ]; then
+  if [ -n "$DRY_RUN" ]; then
+    log "Execute a dry-run rsync on remote aliases"
+    rsync -e "ssh -p ${PORT}" . "${SERVER}:${DEPLOY_PATH}" -hlrituvz --stats --delete-after --exclude-from='.rsync-exclude' --dry-run
+    exit
+  fi
+
   if [ -z $FORCE_DEPLOY ]; then
     read -p "Are you sure that you want to continue this deployment to production? [y/n] " -n 1 -r
     echo # move to a new line
@@ -107,7 +118,7 @@ if [ "${ENV}" == "@acc" ] || [ "${ENV}" == "@prod" ]; then
   fi
 
   log "Execute rsync"
-  rsync -e "ssh -p ${PORT}" . "${SERVER}:${DEPLOY_PATH}" -hlrtuvz --stats --delete-after --exclude-from='.rsync-exclude' --backup-dir="${BACKUP_PATH}" || exit 1
+  rsync -e "ssh -p ${PORT}" . "${SERVER}:${DEPLOY_PATH}" -hlrituvz --stats --delete-after --exclude-from='.rsync-exclude' --backup-dir="${BACKUP_PATH}" || exit 1
 
   log_success "Successfully finished rsync"
 else
@@ -122,7 +133,7 @@ if [ "${ENV}" == "@acc" ] || [ "${ENV}" == "@prod" ]; then
 
         bash scripts/db-backup.sh $BACKUP_PATH
 
-        php artisan down --render="errors::maintenance"
+        php artisan down
         php artisan config:cache
         php artisan route:cache
         php artisan view:cache
