@@ -4,6 +4,7 @@
 .git*
 .rsync-exclude
 .styleci.yml
+.well-known
 README.md
 TODO.md
 bootstrap/cache
