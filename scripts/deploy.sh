@@ -90,7 +90,7 @@ log_text "The current environment is \033[1m${ENV}"
 if [ "${ENV}" == "@acc" ] || [ "${ENV}" == "@prod" ]; then
   if [ -n "$DRY_RUN" ]; then
     log "Execute a dry-run rsync on remote aliases"
-    rsync -e "ssh -p ${PORT}" . "${SERVER}:${DEPLOY_PATH}" -hlrituvz --stats --delete-after --exclude-from='.rsync-exclude' --dry-run
+    rsync -e "ssh -p ${PORT}" . "${SERVER}:${DEPLOY_PATH}" -crblPi --verbose --stats --delete-after --exclude-from='.rsync-exclude' --dry-run
     exit
   fi
 
@@ -118,7 +118,7 @@ if [ "${ENV}" == "@acc" ] || [ "${ENV}" == "@prod" ]; then
   fi
 
   log "Execute rsync"
-  rsync -e "ssh -p ${PORT}" . "${SERVER}:${DEPLOY_PATH}" -hlrituvz --stats --delete-after --exclude-from='.rsync-exclude' --backup-dir="${BACKUP_PATH}" || exit 1
+  rsync -e "ssh -p ${PORT}" . "${SERVER}:${DEPLOY_PATH}" -crblPi --verbose --stats --delete-after --exclude-from='.rsync-exclude' --backup-dir="${BACKUP_PATH}" || exit 1
 
   log_success "Successfully finished rsync"
 else
