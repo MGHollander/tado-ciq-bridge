@@ -131,8 +131,8 @@ The following steps need to be taken to trigger a deployment.
 changes.
 
     ```bash
-    git checkout develop
-    git pull origin develop
+    git checkout main
+    git pull origin main
     ```
 
 2. Create a release branch with the new version. Replace x.x.x with the new
@@ -140,7 +140,7 @@ version. Run `git describe --tags $(git rev-list --tags --max-count=1)` to get
 the last release tag, if you don't know the last version and bump the version.
 
     ```bash
-    git checkout -b release-x.x.x develop
+    git checkout -b release-x.x.x main
     ```
 
 3. Create a tag for the new release. Replace both instances of x.x.x with the
