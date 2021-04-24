@@ -23,8 +23,8 @@ and narrows it down to the bear minimum for the
 
 ## Scheduler
 
-The API uses the scheduler. Add the following cron entry to your server to
-enable it.
+The API uses the scheduler for automated tasks like cleaning up old user
+sessions. Add the following cron entry to your server to enable it.
 
 ```bash
 * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
