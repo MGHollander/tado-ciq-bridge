@@ -6,7 +6,8 @@
 
     <title>tado° Garmin Connect IQ bridge</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Nunito:200,600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,600&display=swap" media="print" onload="this.media='all'" />
     <link href="/css/app.css" rel="stylesheet">
 </head>
 <body>
