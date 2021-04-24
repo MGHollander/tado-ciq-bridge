@@ -1,7 +1,7 @@
 :root {
     --color-text: #636b6f;
-    --color-link: #0093c4;
-    --color-link-hover: #006283;
+    --color-link: #006283;
+    --color-link-hover: #00455c;
     --color-additional: #d7dadb;
     --font-main: 'Nunito', sans-serif;
 }
@@ -41,6 +41,7 @@ html, body {
 
 .title {
     font-size: 2em;
+    font-weight: 200;
     margin-bottom: 1em;
 }
 
