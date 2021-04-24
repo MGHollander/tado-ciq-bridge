@@ -1,5 +1,7 @@
 :root {
     --color-text: #636b6f;
+    --color-link: #0093c4;
+    --color-link-hover: #006283;
     --color-additional: #d7dadb;
     --font-main: 'Nunito', sans-serif;
 }
@@ -67,13 +69,17 @@ html, body {
 }
 
 .links > a {
-    color: var(--color-text);
+    color: var(--color-link);
     padding: 0.5em;
     font-size: 0.8125em;
     font-weight: 600;
     letter-spacing: .1rem;
     text-decoration: none;
     text-transform: uppercase;
+}
+
+.links > a:hover {
+    color: var(--color-link-hover);
 }
 
 @media only screen and (min-width: 48rem) {
