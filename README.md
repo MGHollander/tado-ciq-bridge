@@ -14,12 +14,21 @@ and narrows it down to the bear minimum for the
 
 ## Table of content <!-- omit in toc -->
 
-- [Scheduler](#scheduler)
-- [API documentation](#api-documentation)
-  - [Get user information](#get-user-information)
-  - [Get data from all zones in a home](#get-data-from-all-zones-in-a-home)
-- [Contribution](#contribution)
-- [Deployment](#deployment)
+- [tado° Garmin Connect IQ bridge](#tado-garmin-connect-iq-bridge)
+  - [Installation / development](#installation--development)
+  - [Scheduler](#scheduler)
+  - [API documentation](#api-documentation)
+    - [Get user information](#get-user-information)
+    - [Get data from all zones in a home](#get-data-from-all-zones-in-a-home)
+  - [Contribution](#contribution)
+  - [Deployment](#deployment)
+
+## Installation / development
+
+1. Create a MySQL database.
+2. Clone `.env.example` and rename it to `.env`.
+3. Add you db credentials to `.env`.
+4. Run `php artisan migrate`.
 
 ## Scheduler
 
